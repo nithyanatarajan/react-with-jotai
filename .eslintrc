@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb"
+  ],
+  "rules": {
+    "react/function-component-definition": [0],
+    "react/jsx-filename-extension": [0],
+    "react/jsx-one-expression-per-line": [0]
+  }
+}
