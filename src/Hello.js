@@ -1,14 +1,26 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import { atom, useAtom } from 'jotai';
 
-const Hello = ({ name = 'World!' }) => <h1> Hello, {name} </h1>;
+const nameAtom = atom('World!');
 
-Hello.propTypes = {
-  name: PropTypes.string,
+// Defining this atom within the CharCount component produces continues re-rendering
+const nameLengthAtom = atom((get) => get(nameAtom).length);
+
+const GetName = () => {
+  const [name, setName] = useAtom(nameAtom);
+  return <input value={name} onChange={(e) => setName(e.target.value)} />;
 };
 
-Hello.defaultProps = {
-  name: 'World!',
+const CharCount = () => {
+  const [len] = useAtom(nameLengthAtom);
+  return <div>Length: {len}</div>;
 };
+
+const Print = () => {
+  const [name] = useAtom(nameAtom);
+  return <h1> Hello, {name} </h1>;
+};
+
+const Hello = () => (<>  <Print /> <GetName /> <CharCount /></>);
 
 export default Hello;
