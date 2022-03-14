@@ -2,7 +2,8 @@ import React from 'react';
 import { useAtomValue } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { useCommitCount } from '../hooks';
-import { dotsAtom, drawingAtom, updateDotsAtom } from '../state';
+import { dotsAtom, updateDotsonDrawingAtom } from '../state/dots';
+import { disableDrawingAtom, enableDrawingAtom } from '../state/drawing';
 
 const SvgDots = () => {
   const dots = useAtomValue(dotsAtom);
@@ -16,10 +17,9 @@ const SvgDots = () => {
 };
 
 const SvgRoot = () => {
-  const addPoint = useUpdateAtom(updateDotsAtom);
-  const setDrawingAtom = useUpdateAtom(drawingAtom);
-  const handleMouseUp = () => setDrawingAtom(false);
-  const handleMouseDown = () => setDrawingAtom(true);
+  const addPoint = useUpdateAtom(updateDotsonDrawingAtom);
+  const handleMouseUp = useUpdateAtom(disableDrawingAtom);
+  const handleMouseDown = useUpdateAtom(enableDrawingAtom);
 
   return (
     <svg

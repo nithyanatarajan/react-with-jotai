@@ -1,10 +1,10 @@
 import { atom } from 'jotai';
+import { drawingAtom } from './drawing';
 
 export const dotsAtom = atom([]);
 export const dotsLengthAtom = atom((get) => get(dotsAtom).length);
-export const drawingAtom = atom(false);
 
-export const updateDotsAtom = atom(
+export const updateDotsonDrawingAtom = atom(
   null,
   (get, set, update) => {
     if (get(drawingAtom)) {
