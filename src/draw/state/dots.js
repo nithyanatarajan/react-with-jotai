@@ -43,4 +43,9 @@ export const commitDotsWithDisableDrawingAtom = atom(
   },
 );
 
+export const resetDotsAtom = atom(
+  null,
+  (_get, set) => set(dotsAtom, []),
+);
+
 export default {};
