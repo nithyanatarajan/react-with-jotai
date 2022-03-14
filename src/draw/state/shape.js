@@ -26,4 +26,6 @@ export const addShapeAtom = atom(
   },
 );
 
+export const shapesLengthAtom = atom((get) => get(shapeAtomsAtom).length);
+
 export default {};
