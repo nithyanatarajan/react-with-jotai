@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { drawingAtom } from './drawing';
+import { disableDrawingAtom, drawingAtom } from './drawing';
+import { addShapeAtom } from './shape';
 
 export const dotsAtom = atom([]);
 export const dotsLengthAtom = atom((get) => get(dotsAtom).length);
@@ -17,6 +18,28 @@ export const updateDotsonDrawingAtom = atom(
     if (get(drawingAtom)) {
       set(addDotAtom, update);
     }
+  },
+);
+
+export const commitDotsAtom = atom(
+  null,
+  (get, set) => {
+    set(addShapeAtom, get(dotsAtom));
+    set(dotsAtom, []);
+  },
+);
+
+/*
+    commitDots();
+    disableDrawing();
+
+and the following are the same
+*/
+export const commitDotsWithDisableDrawingAtom = atom(
+  null,
+  (get, set) => {
+    set(disableDrawingAtom);
+    set(commitDotsAtom, null);
   },
 );
 
