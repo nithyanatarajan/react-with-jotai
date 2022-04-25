@@ -1,20 +1,22 @@
 import React from 'react';
 import { useUpdateAtom } from 'jotai/utils';
-import { nanoid } from 'nanoid';
-import { addToFamilyAtom } from './state';
+import { addItemToFamilyAtom } from './state';
 
 const ItemForm = () => {
-  const addToFamily = useUpdateAtom(addToFamilyAtom);
+  const addItemToFamily = useUpdateAtom(addItemToFamilyAtom);
   const add = (e) => {
     e.preventDefault();
-    const id = nanoid();
+    const id = e.currentTarget.inputId.value;
     const title = e.currentTarget.inputTitle.value;
+    e.currentTarget.inputId.value = '';
     e.currentTarget.inputTitle.value = '';
-    addToFamily({ id, title });
+    addItemToFamily({ id, title });
   };
   return (
     <form onSubmit={add}>
-      <input name="inputTitle" placeholder="Type ..." />
+      <input name="inputId" placeholder="Type Id..." />
+      <input name="inputTitle" placeholder="Type Title..." />
+      <button type="submit">Add</button>
     </form>
   );
 };

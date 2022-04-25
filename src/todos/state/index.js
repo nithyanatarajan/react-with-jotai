@@ -8,21 +8,45 @@ const addItemIdAtom = atom(
   (get, set, update) => set(itemIdsAtom, (prev) => [...prev, update]),
 );
 
-const initializeAtom = (item) => atom({ title: item.title || 'No title' });
+const itemAtom = atom({});
+
+const initializeAtom = (item) => {
+  // eslint-disable-next-line no-console
+  console.log(item);
+  return atom(
+    (get) => get(itemAtom),
+    (get, set, update) => update,
+  );
+};
 const comparer = (one, another) => one.id === another.id;
 export const itemsAtomFamily = atomFamily(initializeAtom, comparer);
 // To get one atom from family => get(itemsAtomFamily({ id }))
 
-export const addToFamilyAtom = atom(
-  (get) => get(itemIdsAtom).filter((id) => get(itemsAtomFamily(id))),
+export const addItemToFamilyAtom = atom(
+  null,
   (get, set, { id, title }) => {
     if (!get(itemIdsAtom).includes(id)) {
       set(addItemIdAtom, id);
     }
+    // eslint-disable-next-line no-console
+    console.log(title);
     itemsAtomFamily({ id, title });
-    // set(itemsAtomFamily(id), title);
   },
 );
+
+/*
+export const itemsWriteOnlyAtom = atom(
+  null,
+  (get, set, itemIdToValue) => {
+    Object.keys(itemIdToValue).map((id) => {
+      set(itemAtomFamily(id), {
+        ...get(itemAtomFamily({ id })),
+        ...itemIdToValue[id],
+      });
+    });
+  },
+);
+*/
 
 /*
 const selectedLanguages = atomFamily(() => false)
