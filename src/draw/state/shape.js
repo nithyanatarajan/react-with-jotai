@@ -12,7 +12,9 @@ const pointsToPath = (points) => {
   return d;
 };
 
-export const createShapeAtom = (points) => atom({ path: pointsToPath(points) });
+const createShapeAtom = (points) => atom({ path: pointsToPath(points) });
+
+// shapeAtomsAtom holds list of shapeAtom configs
 export const shapeAtomsAtom = atom([]);
 
 export const addShapeAtom = atom(

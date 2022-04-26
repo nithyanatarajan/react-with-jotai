@@ -5,7 +5,7 @@ import { addShapeAtom } from './shape';
 export const dotsAtom = atom([]);
 export const dotsLengthAtom = atom((get) => get(dotsAtom).length);
 
-const addDotAtom = atom(
+export const addDotAtom = atom(
   null,
   (_get, set, update) => {
     set(dotsAtom, (prev) => [...prev, update]);
