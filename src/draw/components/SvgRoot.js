@@ -1,23 +1,10 @@
 import React from 'react';
-import { useAtomValue } from 'jotai';
 import { useUpdateAtom } from 'jotai/utils';
 import { useCommitCount } from '../hooks';
-import {
-  dotsAtom, updateDotsonDrawingAtom, commitDotsWithDisableDrawingAtom,
-} from '../state/dots';
+import { updateDotsonDrawingAtom, commitDotsWithDisableDrawingAtom } from '../state/dots';
 import { enableDrawingAtom } from '../state/drawing';
 import SvgShapes from './SvgShapes';
-
-const SvgDots = () => {
-  const dots = useAtomValue(dotsAtom);
-  return (
-    <g>
-      {dots.map(([x, y]) => (
-        <circle cx={x} cy={y} r="2" fill="#aaa" />
-      ))}
-    </g>
-  );
-};
+import SvgDots from './SvgDot';
 
 const SvgRoot = () => {
   const addPoint = useUpdateAtom(updateDotsonDrawingAtom);
